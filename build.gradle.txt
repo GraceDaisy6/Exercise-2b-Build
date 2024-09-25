@@ -1,0 +1,34 @@
+/*
+ Compile java
+ Run tests
+ Copy static resources
+ Format test results
+ Build a JAR
+ Create a top-level task that does all these things
+ */
+
+ apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+dependencies {
+  implementation 'commons-codec:commons-codec:1.6'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'org.gradle.main.Main'
+        )
+    }
+}
+
+task run(type: JavaExec) {
+  main = 'org.gradle.main.Main'
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+test{
+	useJUnit()
+}
